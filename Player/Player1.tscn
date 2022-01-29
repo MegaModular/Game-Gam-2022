@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Player/Scripts/Player1.gd" type="Script" id=1]
+
+[node name="Player1" type="KinematicBody"]
+script = ExtResource( 1 )

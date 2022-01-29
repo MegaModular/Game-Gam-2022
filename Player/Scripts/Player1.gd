@@ -4,7 +4,9 @@ onready var head = get_node("CameraHolder")
 onready var groundcheck = $GroundCheck
 
 #important variables to change
+var min_speed = 10
 var speed = 10
+var max_speed = 20
 var gravity = 20
 var mouse_sensitivity = 0.1
 
@@ -20,6 +22,8 @@ var zoom_speed = 0.1
 #basically is_on_floor()
 var full_colliding = false
 
+#NotouchyCode i will execute your whole family
+var sprinting = false
 var h_acceleration = 6
 var h_velocity = Vector3()
 var movement = Vector3()
@@ -44,6 +48,7 @@ func _input(event):
 
 func _physics_process(delta):
 	camera_shit()
+	handle_sprinting()
 	#thank you garbaj 
 	direction = Vector3()
 	
@@ -90,3 +95,11 @@ func camera_shit():
 	camera_zoom = lerp(camera_zoom, desired_zoom, 0.2)
 	camera_zoom = clamp(camera_zoom, min_zoom, max_zoom)
 	desired_zoom = clamp(desired_zoom, min_zoom, max_zoom)
+
+func handle_sprinting():
+	if Input.is_action_pressed("shift") and Input.is_action_pressed("w"):
+		sprinting = true
+		speed = max_speed
+	else:
+		sprinting = false
+		speed = min_speed

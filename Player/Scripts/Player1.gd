@@ -7,13 +7,17 @@ onready var groundcheck = $GroundCheck
 var speed = 10
 var gravity = 20
 var mouse_sensitivity = 0.1
-#1-5
-var camera_zoom = 1
-var desired_zoom = 1
-var zoom_speed = 0.1
 
 var jump_force = 10
 
+#Camera shit dont touch
+var camera_zoom = 1
+var min_zoom = 0.5
+var max_zoom = 3
+var desired_zoom = 1
+var zoom_speed = 0.1
+
+#basically is_on_floor()
 var full_colliding = false
 
 var h_acceleration = 6
@@ -84,4 +88,5 @@ func _unhandled_input(event):
 func camera_shit():
 	$CameraHolder.scale = Vector3.ONE * camera_zoom
 	camera_zoom = lerp(camera_zoom, desired_zoom, 0.2)
-	print(desired_zoom)
+	camera_zoom = clamp(camera_zoom, min_zoom, max_zoom)
+	desired_zoom = clamp(desired_zoom, min_zoom, max_zoom)

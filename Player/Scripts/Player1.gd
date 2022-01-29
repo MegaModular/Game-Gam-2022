@@ -30,6 +30,8 @@ var movement = Vector3()
 var gravity_vec = Vector3()
 var direction = Vector3()
 
+var mesh_direction = Vector2()
+
 func _ready():
 	$CameraHolder.scale = Vector3.ONE * camera_zoom
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -103,3 +105,17 @@ func handle_sprinting():
 	else:
 		sprinting = false
 		speed = min_speed
+
+func get_direction():
+	mesh_direction = Vector3.ZERO
+	if Input.is_action_pressed("w"):
+		mesh_direction += Vector2(1, 0)
+	if Input.is_action_pressed("a"):
+		mesh_direction += Vector2(0, 1)
+	if Input.is_action_pressed("s"):
+		mesh_direction += Vector2(-1, 0)
+	if Input.is_action_pressed("d"):
+		mesh_direction += Vector2(0, -1)
+	
+	mesh_direction.normalized()
+	emit_signal("direction", mesh_direction)

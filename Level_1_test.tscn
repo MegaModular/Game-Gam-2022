@@ -1,9 +1,11 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Player/Player1Test.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/HUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Environment/Obstacles/YellowPlatform.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Environment/Obstacles/GreenPlatform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://PerlinNoise.png" type="Texture" id=5]
+[ext_resource path="res://WaterDistortion.png" type="Texture" id=6]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=7]
 [ext_resource path="res://Environment/sand.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=9]
@@ -11,6 +13,9 @@
 [ext_resource path="res://Environment/Obstacles/Bridge_long.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Level_1_test_slot0_albedo_bump.packed_tex" type="Texture" id=12]
 [ext_resource path="res://Level_1_test_slot0_normal_roughness.packed_tex" type="Texture" id=13]
+[ext_resource path="res://Environment/Obstacles/GreenPlatform.gd" type="Script" id=14]
+[ext_resource path="res://Song4.mp3" type="AudioStream" id=15]
+[ext_resource path="res://Environment/Obstacles/tree.tscn" type="PackedScene" id=16]
 
 [sub_resource type="Shader" id=6]
 code = "shader_type spatial;
@@ -439,6 +444,21 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 5 )
+shader_param/beer_factor = 0.8
+shader_param/foam_distance = 0.01
+shader_param/foam_max_distance = 0.4
+shader_param/foam_min_distance = 0.04
+shader_param/foam_color = Color( 1, 1, 1, 1 )
+shader_param/surface_noise_tiling = Vector2( 1, 4 )
+shader_param/surface_noise_scroll = Vector3( 0.03, 0.03, 0 )
+shader_param/surface_noise_cutoff = 0.777
+shader_param/surface_distortion_amount = 0.27
+shader_param/_DepthGradientShallow = Color( 0.325, 0.807, 0.971, 0.725 )
+shader_param/_DepthGradientDeep = Color( 0.086, 0.407, 1, 0.749 )
+shader_param/_DepthMaxDistance = 1.0
+shader_param/_DepthFactor = 1.0
+shader_param/surfaceNoise = ExtResource( 5 )
+shader_param/distortNoise = ExtResource( 6 )
 
 [sub_resource type="CubeMesh" id=1]
 material = SubResource( 4 )
@@ -458,6 +478,13 @@ shader_type = "Custom"
 custom_shader = SubResource( 6 )
 custom_globalmap_shader = null
 texture_set = SubResource( 7 )
+shader_params/u_ground_uv_scale_per_texture = Plane( 20, 20, 20, 20 )
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = false
+shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
+shader_params/u_globalmap_blend_start = null
+shader_params/u_globalmap_blend_distance = null
+shader_params/u_colormap_opacity_per_texture = Plane( 1, 1, 1, 1 )
 
 [node name="sand" parent="." instance=ExtResource( 8 )]
 transform = Transform( 34.8023, 0, 0, 0, 8.61546, 0, 0, 0, 39.2554, -177.296, -47.898, 69.5782 )
@@ -487,14 +514,23 @@ transform = Transform( 11.4448, 0, 0, 0, 50.5825, 0, 0, 0, 0.16854, 3.99991, 5.5
 [node name="GreenPlatform4" parent="." instance=ExtResource( 4 )]
 transform = Transform( 2.22965, 0, 0, 0, 37.6832, 0, 0, 0, 1.53094, 79.5553, 1.73714, -151.505 )
 
+[node name="GreenPlatform5" parent="." instance=ExtResource( 4 )]
+transform = Transform( 2.22965, 0, 0, 0, 37.6832, 0, 0, 0, 1.53094, 137.716, 1.73714, -151.505 )
+
+[node name="GreenPlatform6" parent="." instance=ExtResource( 4 )]
+transform = Transform( 2.22965, 0, 0, 0, 37.6832, 0, 0, 0, 1.53094, 155.885, 5.1041, -151.505 )
+
+[node name="GreenPlatform7" parent="." instance=ExtResource( 4 )]
+transform = Transform( 2.22965, 0, 0, 0, 50.682, 0, 0, 0, 1.53094, 155.885, 5.24679, -133.016 )
+
+[node name="GreenPlatform8" parent="." instance=ExtResource( 4 )]
+transform = Transform( 2.22965, 0, 0, 0, 50.682, 0, 0, 0, 1.53094, 139.211, 11.0141, -133.016 )
+
 [node name="GreenPlatform2" parent="." instance=ExtResource( 4 )]
-transform = Transform( 11.4448, 0, 0, 0, 32.9786, 0, 0, 0, 0.16854, 3.99991, 5.54296, 80.4577 )
+transform = Transform( 11.4448, 0, 0, 0, 32.9786, 0, 0, 0, 0.16854, 3.99991, 5.54296, 55.8415 )
 
 [node name="YellowPlatform" parent="." instance=ExtResource( 3 )]
 transform = Transform( 11.4211, 0, 0, 0, 63.2341, 0, 0, 0, 0.13332, 3.99672, 1.41176, -5.14824 )
-
-[node name="YellowPlatform6" parent="." instance=ExtResource( 3 )]
-transform = Transform( 11.4211, 0, 0, 0, 63.2341, 0, 0, 0, 3.54262, 3.99672, -5.74894, 40.4625 )
 
 [node name="YellowPlatform3" parent="." instance=ExtResource( 3 )]
 transform = Transform( -4.99232e-07, 0, 0.13332, 0, 189.163, 0, -77.9417, 0, -3.97697e-08, -22.2917, 1.41176, -5.14824 )
@@ -508,7 +544,18 @@ visible = false
 transform = Transform( 11.4211, 0, 0, 0, 55.1866, 0, 0, 0, 0.0975489, 3.91489, 3.38521, -41.9709 )
 
 [node name="YellowPlatform5" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1.82554, 0, 0, 0, 6.64845, 0, 0, 0, 1.7182, 93.6918, 10.4665, -151.357 )
+transform = Transform( 7.30595, 0, 0, 0, 6.64845, 0, 0, 0, 1.7182, 108.327, 10.4665, -151.357 )
+
+[node name="YellowPlatform6" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1.6821, 0, 0, 0, 75.1149, 0, 0, 0, 1.7182, 146.601, 5.18395, -138.156 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+autoplay = true
 
 [node name="Bridge_long2" parent="." instance=ExtResource( 11 )]
 transform = Transform( 0.243331, 0.0112529, 4.57133, 0.206052, 4.57312, -0.0222254, -4.56669, 0.206941, 0.242575, 7.56265, -0.829317, -104.987 )
+script = ExtResource( 14 )
+
+[node name="tree" parent="." instance=ExtResource( 16 )]
+transform = Transform( 6, 0, 0, 0, 6, 0, 0, 0, 6, 6.38231, 2.6257, -176.675 )

@@ -14,7 +14,7 @@ var max_speed = 20
 var gravity = 20
 var mouse_sensitivity = 0.1
 
-var jump_force = 10
+var jump_force = 15
 
 #Camera shit dont touch
 var camera_zoom = 1
@@ -41,20 +41,29 @@ var color
 func _ready():
 	if self.get_parent().is_in_group("yellow"):
 		color = "yellow"
+		self.set_collision_layer_bit(1, true)
+		self.set_collision_mask_bit(1, true)
+		$GroundCheck.set_collision_mask_bit(1, true)
+		print(self.get_collision_mask_bit(1))
 	if self.get_parent().is_in_group("green"):
 		color = "green"
+		self.set_collision_layer_bit(2, true)
+		self.set_collision_mask_bit(2, true)
+		$GroundCheck.set_collision_mask_bit(2, true)
+	
 	$CameraHolder.scale = Vector3.ONE * camera_zoom
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	pass # Replace with function body.
 
-func _process(delta):
-	turn_onoff()
+func _process(_delta):
+	pass
 
 func _input(event):
-	if event is InputEventMouseMotion:
-		rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
-		head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
-		head.rotation.x = clamp(head.rotation.x, deg2rad(-89), deg2rad(89))
+	if globals.active_player == color:
+		if event is InputEventMouseMotion:
+			rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
+			head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
+			head.rotation.x = clamp(head.rotation.x, deg2rad(-89), deg2rad(89))
 	
 
 func _physics_process(delta):
@@ -93,7 +102,6 @@ func _physics_process(delta):
 	movement.x = h_velocity.x + gravity_vec.x
 	movement.y = gravity_vec.y
 	
-	#if globals.active_player == color:
 	move_and_slide(movement, Vector3.UP)
 
 func _unhandled_input(event):
@@ -115,11 +123,3 @@ func handle_sprinting():
 	else:
 		sprinting = false
 		speed = min_speed
-
-
-func turn_onoff():
-	#if globals.active_player == color:
-	#	self.set_physics_process(true)
-	#if globals.active_player != color:
-	#	self.set_physics_process(false)
-	pass

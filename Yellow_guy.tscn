@@ -6092,15 +6092,6 @@ graph_offset = Vector2( 141, -13 )
 [node name="Yellow_guy" type="Spatial"]
 script = ExtResource( 4 )
 
-[node name="Cube002" type="Spatial" parent="."]
-transform = Transform( 0.198832, 0, 0, 0, 0.198832, 0, 0, 0, 0.198832, 0.330474, 0.670273, -0.235726 )
-
-[node name="Empty" type="Spatial" parent="."]
-transform = Transform( 0.2802, 0, 0, 0, -3.34025e-08, -0.2802, 0, 0.2802, -3.34025e-08, -5.10568, 2.62022, 0.260311 )
-
-[node name="Empty001" type="Spatial" parent="."]
-transform = Transform( 0.195969, 0, 0, 0, 0.195969, 0, 0, 0, 0.195969, -2.49516, 2.64757, 0.0626292 )
-
 [node name="rig" type="Spatial" parent="."]
 
 [node name="Skeleton" type="Skeleton" parent="rig"]
@@ -9650,6 +9641,3 @@ tree_root = SubResource( 31 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 32 )
-
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12 )

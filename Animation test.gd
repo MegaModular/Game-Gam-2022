@@ -25,3 +25,15 @@ func _input(event):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func walk():
+	state_machine.travel("walk")
+func jump():
+	state_machine.travel("jump")
+func land():
+	state_machine.travel("land")
+func idle():
+	state_machine.travel("Idle")
+func sprint():
+	state_machine.travel("sprint")

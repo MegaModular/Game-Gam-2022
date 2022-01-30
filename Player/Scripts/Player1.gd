@@ -72,6 +72,7 @@ func _physics_process(delta):
 	#thank you garbaj 
 	direction = Vector3()
 	
+	print(groundcheck.is_colliding())
 	if groundcheck.is_colliding():
 		full_colliding = true
 	else:

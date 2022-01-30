@@ -10,7 +10,7 @@ height = 4.0
 radius = 2.6
 height = 0.5
 
-[node name="Player1" type="KinematicBody"]
+[node name="Player1" type="KinematicBody" groups=["Hat"]]
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
@@ -30,6 +30,54 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.180676, 0 )
 [node name="GroundCheck" type="RayCast" parent="Node"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.734513, 0 )
 enabled = true
+collide_with_areas = true
+
+[node name="GroundCheck13" type="RayCast" parent="Node"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.47288, 2.64618, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.559, 0 )
+collide_with_areas = true
+
+[node name="GroundCheck15" type="RayCast" parent="Node"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.78, 2.64618, -1.6247 )
+enabled = true
+cast_to = Vector3( 0, -0.559, 0 )
+collide_with_areas = true
+
+[node name="GroundCheck16" type="RayCast" parent="Node"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85168, 2.64618, -1.6247 )
+enabled = true
+cast_to = Vector3( 0, -0.559, 0 )
+collide_with_areas = true
+
+[node name="GroundCheck17" type="RayCast" parent="Node"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85168, 2.64618, 1.58886 )
+enabled = true
+cast_to = Vector3( 0, -0.559, 0 )
+collide_with_areas = true
+
+[node name="GroundCheck14" type="RayCast" parent="Node"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.64859, 2.64618, 1.72027 )
+enabled = true
+cast_to = Vector3( 0, -0.559, 0 )
+collide_with_areas = true
+
+[node name="GroundCheck12" type="RayCast" parent="Node"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.64618, 2.36737 )
+enabled = true
+cast_to = Vector3( 0, -0.559, 0 )
+collide_with_areas = true
+
+[node name="GroundCheck11" type="RayCast" parent="Node"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.64618, -2.5 )
+enabled = true
+cast_to = Vector3( 0, -0.559, 0 )
+collide_with_areas = true
+
+[node name="GroundCheck10" type="RayCast" parent="Node"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4323, 2.65207, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.559, 0 )
 collide_with_areas = true
 
 [node name="GroundCheck5" type="RayCast" parent="Node"]
@@ -74,5 +122,9 @@ collide_with_areas = true
 
 [node name="IdleTimer" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="MiddleCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38419e-07, -0.678245, 0 )
+enabled = true
 
 [connection signal="timeout" from="IdleTimer" to="." method="_on_Timer_timeout"]

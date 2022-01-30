@@ -28,6 +28,7 @@ var anim_state = "idle"
 
 #basically is_on_floor()
 var full_colliding = false
+var is_on_hat = false
 
 #NotouchyCode i will execute your whole family
 var sprinting = false
@@ -38,6 +39,9 @@ var gravity_vec = Vector3()
 var direction = Vector3()
 
 var mesh_direction = Vector2()
+
+var hat_offset = Vector3()
+
 
 var color
 
@@ -96,21 +100,27 @@ func check_ground():
 
 
 func _physics_process(delta):
+	check_hat()
 	camera_shit()
 	handle_sprinting()
 	#thank you garbaj 
 	check_ground()
 	
 	if full_colliding and anim_state == "jump":
-		if globals.active_player == color:
-			guy.land()
-			anim_state = "idle"
+		guy.land()
+		anim_state = "idle"
+		
 	
 	direction = Vector3()
 	if not full_colliding:
 		gravity_vec += Vector3.DOWN * gravity * delta
 	else: 
 		gravity_vec = -get_floor_normal() * gravity
+	
+	if is_on_hat:
+		gravity_vec = Vector3.UP * jump_force * 1.5
+		#guy.jump()
+		anim_state = "jump"
 	
 	if globals.active_player == color:
 		if Input.is_action_just_pressed("space") and full_colliding:
@@ -158,8 +168,15 @@ func handle_sprinting():
 		if anim_state == "sprint":
 			guy.walk()
 
+func check_hat():
+	if $MiddleCast.is_colliding():
+		if $MiddleCast.get_collider().is_in_group("Hat"):
+			is_on_hat = true
+	else:
+		is_on_hat = false
 
 func _on_Timer_timeout():
 	if full_colliding:
 		guy.idle()
 		$IdleTimer.start()
+

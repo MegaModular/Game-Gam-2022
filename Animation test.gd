@@ -12,19 +12,19 @@ func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 
 func _input(event):
-	if Input.is_action_just_pressed("a"):
-		
-		state_machine.travel("walk")
-		print(state_machine)
-	if Input.is_action_just_pressed("space"):
-		state_machine.travel("air")
-	if Input.is_action_just_pressed("w"):
-		state_machine.travel("Idle")
-	if Input.is_action_just_pressed("shift"):
-		state_machine.travel("Sprint")
+#	if Input.is_action_just_pressed("a"):
+#
+#		state_machine.travel("walk")
+#		print(state_machine)
+#	if Input.is_action_just_pressed("space"):
+#		state_machine.travel("air")
+#	if Input.is_action_just_pressed("w"):
+#		state_machine.travel("Idle")
+#	if Input.is_action_just_pressed("shift"):
+#		state_machine.travel("Sprint")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
-#	pass
+	pass
 
 
 func walk():
@@ -36,4 +36,4 @@ func land():
 func idle():
 	state_machine.travel("Idle")
 func sprint():
-	state_machine.travel("sprint")
+	state_machine.travel("Sprint")

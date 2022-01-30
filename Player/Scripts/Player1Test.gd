@@ -5,6 +5,7 @@ extends Spatial
 onready var meshInstance = $MeshHolders
 onready var globals = $"/root/Globals"
 
+export var spin_speed = 0.15
 
 var direction
 
@@ -20,14 +21,14 @@ func _ready():
 		$MeshHolders/Yellow.queue_free()
 		print("queue free yellow")
 
-func _process(delta):
+func _process(_delta):
 	turn_camera_onoff()
 	meshInstance.translation = $Player1.translation
 	direction = -$Player1.movement
 	if globals.active_player == color:
 		if Input.is_action_pressed("w") or Input.is_action_pressed("a") or Input.is_action_pressed("s") or Input.is_action_pressed("d"):
 			
-			meshInstance.rotation.y = lerp_angle(meshInstance.rotation.y, atan2(direction.x, direction.z), 0.1)
+			meshInstance.rotation.y = lerp_angle(meshInstance.rotation.y, atan2(direction.x, direction.z), spin_speed)
 
 func turn_camera_onoff():
 	if color == globals.active_player:

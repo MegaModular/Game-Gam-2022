@@ -21,7 +21,8 @@ func _process(_delta):
 	
 
 func update_color():
-	if on:
-		material.set_albedo(Color(1, 0.831373, 0.05098, 1))
-	if not on:
-		material.set_albedo(Color(1, 0.831373, 0.05098, 0.2))
+#	if on:
+#		material.set_albedo(Color(1, 0.831373, 0.05098, 1))
+#	if not on:
+#		material.set_albedo(Color(1, 0.831373, 0.05098, 0.2))
+	pass

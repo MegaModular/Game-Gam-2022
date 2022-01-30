@@ -19,6 +19,7 @@ func _ready():
 	if self.is_in_group("green"):
 		color = "green"
 		$MeshHolders/Yellow.queue_free()
+		$MeshHolders/Yellow_guy/rig/Skeleton/Cube
 
 func _process(_delta):
 	turn_camera_onoff()

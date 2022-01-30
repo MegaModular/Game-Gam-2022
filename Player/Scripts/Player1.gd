@@ -93,7 +93,7 @@ func check_ground():
 	for i in $Node.get_children():
 		if i.is_colliding():
 			tot_collisions += 1
-	if tot_collisions > 0:
+	if tot_collisions > 0 && movement.y < 10:
 		full_colliding = true
 	else:
 		full_colliding = false

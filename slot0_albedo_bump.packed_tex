@@ -1,0 +1,8 @@
+{
+	"contains_albedo": true,
+	"resolution": 512,
+	"src": {
+		"a": "res://Player/3DScans0513_4_download600.jpg",
+		"rgb": "res://Player/3DScans0513_1_download600.jpg"
+	}
+}

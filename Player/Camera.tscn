@@ -2,6 +2,9 @@
 
 [node name="CameraHolder" type="Spatial"]
 
-[node name="Camera" type="Camera" parent="."]
+[node name="ClippedCamera" type="ClippedCamera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6 )
 current = true
+fov = 90.0
+margin = 10.0
+collision_mask = 8

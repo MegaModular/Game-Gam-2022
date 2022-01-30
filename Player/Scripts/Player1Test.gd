@@ -15,11 +15,10 @@ func _ready():
 	if self.is_in_group("yellow"):
 		color = "yellow"
 		$MeshHolders/Green.queue_free()
-		print("queue free gree")
+
 	if self.is_in_group("green"):
 		color = "green"
 		$MeshHolders/Yellow.queue_free()
-		print("queue free yellow")
 
 func _process(_delta):
 	turn_camera_onoff()

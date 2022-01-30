@@ -3,7 +3,7 @@ extends KinematicBody
 #Physics of player, and features
 
 onready var head = get_node("CameraHolder")
-onready var groundcheck = $GroundCheck
+onready var groundcheck = $Node
 
 onready var globals = $"/root/Globals"
 
@@ -43,14 +43,16 @@ func _ready():
 		color = "yellow"
 		self.set_collision_layer_bit(1, true)
 		self.set_collision_mask_bit(1, true)
-		$GroundCheck.set_collision_mask_bit(1, true)
+		for i in $Node.get_children():
+			i.set_collision_mask_bit(1, true)
 		print(self.get_collision_mask_bit(1))
 	if self.get_parent().is_in_group("green"):
 		color = "green"
 		self.set_collision_layer_bit(2, true)
 		self.set_collision_mask_bit(2, true)
-		$GroundCheck.set_collision_mask_bit(2, true)
-	
+		for i in $Node.get_children():
+			i.set_collision_mask_bit(2, true)
+		
 	$CameraHolder.scale = Vector3.ONE * camera_zoom
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	pass # Replace with function body.
@@ -64,20 +66,27 @@ func _input(event):
 			rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
 			head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
 			head.rotation.x = clamp(head.rotation.x, deg2rad(-89), deg2rad(89))
-	
+
+var tot_collisions = 0
+
+func check_ground():
+	tot_collisions = 0
+	for i in $Node.get_children():
+		if i.is_colliding():
+			tot_collisions += 1
+	if tot_collisions > 0:
+		full_colliding = true
+	else:
+		full_colliding = false
+
 
 func _physics_process(delta):
 	camera_shit()
 	handle_sprinting()
 	#thank you garbaj 
+	check_ground()
+	
 	direction = Vector3()
-	
-	print(groundcheck.is_colliding())
-	if groundcheck.is_colliding():
-		full_colliding = true
-	else:
-		full_colliding = false
-	
 	if not full_colliding:
 		gravity_vec += Vector3.DOWN * gravity * delta
 	else: 

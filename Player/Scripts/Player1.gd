@@ -4,6 +4,7 @@ extends KinematicBody
 
 onready var head = get_node("CameraHolder")
 onready var groundcheck = $Node
+onready var guy = $"../MeshHolders/Yellow_guy"
 
 onready var globals = $"/root/Globals"
 
@@ -22,6 +23,8 @@ var min_zoom = 0.5
 var max_zoom = 3
 var desired_zoom = 1
 var zoom_speed = 0.1
+
+var anim_state = "idle"
 
 #basically is_on_floor()
 var full_colliding = false
@@ -66,6 +69,18 @@ func _input(event):
 			rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
 			head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
 			head.rotation.x = clamp(head.rotation.x, deg2rad(-89), deg2rad(89))
+	if Input.is_action_pressed("a") or Input.is_action_pressed("w") or Input.is_action_pressed("s") or Input.is_action_pressed("d"):
+		if full_colliding and globals.active_player == color:
+			if sprinting:
+				guy.sprint()
+				anim_state = "sprint"
+				$IdleTimer.set_wait_time(0.5)
+				$IdleTimer.start()
+			else:
+				guy.walk()
+				anim_state = "walk"
+				$IdleTimer.set_wait_time(0.5)
+				$IdleTimer.start()
 
 var tot_collisions = 0
 
@@ -86,6 +101,11 @@ func _physics_process(delta):
 	#thank you garbaj 
 	check_ground()
 	
+	if full_colliding and anim_state == "jump":
+		if globals.active_player == color:
+			guy.land()
+			anim_state = "idle"
+	
 	direction = Vector3()
 	if not full_colliding:
 		gravity_vec += Vector3.DOWN * gravity * delta
@@ -95,6 +115,8 @@ func _physics_process(delta):
 	if globals.active_player == color:
 		if Input.is_action_just_pressed("space") and full_colliding:
 			gravity_vec = Vector3.UP * jump_force
+			guy.jump()
+			anim_state = "jump"
 		
 		if Input.is_action_pressed("w"):
 			direction -= transform.basis.z
@@ -133,3 +155,11 @@ func handle_sprinting():
 	else:
 		sprinting = false
 		speed = min_speed
+		if anim_state == "sprint":
+			guy.walk()
+
+
+func _on_Timer_timeout():
+	if full_colliding:
+		guy.idle()
+		$IdleTimer.start()

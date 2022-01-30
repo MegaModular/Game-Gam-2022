@@ -12,7 +12,7 @@ albedo_color = Color( 1, 0.207843, 0.207843, 1 )
 material = SubResource( 2 )
 size = Vector3( 1, 0.2, 0.2 )
 
-[node name="Spatial" type="Spatial"]
+[node name="Player" type="Spatial"]
 script = ExtResource( 2 )
 
 [node name="Player1" parent="." instance=ExtResource( 1 )]

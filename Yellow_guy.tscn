@@ -1,8 +1,9 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Gradient.material" type="Material" id=1]
 [ext_resource path="res://sunglasses_shiny.material" type="Material" id=2]
 [ext_resource path="res://sunglasses_matte.material" type="Material" id=3]
+[ext_resource path="res://Animation test.gd" type="Script" id=4]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Yellow_guy_Cube"
@@ -6069,7 +6070,7 @@ xfade_time = 0.12
 
 [sub_resource type="AnimationNodeStateMachine" id=31]
 states/Idle/node = SubResource( 13 )
-states/Idle/position = Vector2( 676, 60 )
+states/Idle/position = Vector2( 689, 50 )
 states/Sprint/node = SubResource( 14 )
 states/Sprint/position = Vector2( 1023, 156 )
 states/air/node = SubResource( 15 )
@@ -6083,11 +6084,13 @@ states/land/position = Vector2( 634, 166 )
 states/walk/node = SubResource( 19 )
 states/walk/position = Vector2( 809, 182 )
 transitions = [ "Idle", "jump", SubResource( 20 ), "jump", "air", SubResource( 21 ), "air", "land", SubResource( 22 ), "land", "Idle", SubResource( 23 ), "Idle", "start walk", SubResource( 24 ), "start walk", "walk", SubResource( 25 ), "walk", "Idle", SubResource( 26 ), "walk", "Sprint", SubResource( 27 ), "Sprint", "Idle", SubResource( 28 ), "Sprint", "jump", SubResource( 29 ), "walk", "jump", SubResource( 30 ) ]
-graph_offset = Vector2( 127, 4 )
+start_node = "Idle"
+graph_offset = Vector2( 141, -13 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=32]
 
 [node name="Yellow_guy" type="Spatial"]
+script = ExtResource( 4 )
 
 [node name="Cube002" type="Spatial" parent="."]
 transform = Transform( 0.198832, 0, 0, 0, 0.198832, 0, 0, 0, 0.198832, 0.330474, 0.670273, -0.235726 )
@@ -9647,3 +9650,6 @@ tree_root = SubResource( 31 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 32 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12 )

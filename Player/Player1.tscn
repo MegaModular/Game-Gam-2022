@@ -18,11 +18,54 @@ shape = SubResource( 5 )
 [node name="CameraHolder" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.843122, 0 )
 
-[node name="GroundCheck" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.539338, 0 )
-enabled = true
-collide_with_areas = true
-
 [node name="CollisionHead" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0.00161922, 0 )
 shape = SubResource( 6 )
+
+[node name="Node" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.180676, 0 )
+
+[node name="GroundCheck" type="RayCast" parent="Node"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.734513, 0 )
+enabled = true
+collide_with_areas = true
+
+[node name="GroundCheck5" type="RayCast" parent="Node"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.734513, -0.983335 )
+enabled = true
+collide_with_areas = true
+
+[node name="GroundCheck7" type="RayCast" parent="Node"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.746219, -0.734513, -0.638122 )
+enabled = true
+collide_with_areas = true
+
+[node name="GroundCheck8" type="RayCast" parent="Node"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.746219, -0.734513, 0.605851 )
+enabled = true
+collide_with_areas = true
+
+[node name="GroundCheck9" type="RayCast" parent="Node"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.739245, -0.734513, 0.605851 )
+enabled = true
+collide_with_areas = true
+
+[node name="GroundCheck6" type="RayCast" parent="Node"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75668, -0.734513, -0.624174 )
+enabled = true
+collide_with_areas = true
+
+[node name="GroundCheck4" type="RayCast" parent="Node"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.979848, -0.734513, 0 )
+enabled = true
+collide_with_areas = true
+
+[node name="GroundCheck3" type="RayCast" parent="Node"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.734513, 0.975896 )
+enabled = true
+collide_with_areas = true
+
+[node name="GroundCheck2" type="RayCast" parent="Node"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00215, -0.734513, 0 )
+enabled = true
+collide_with_areas = true

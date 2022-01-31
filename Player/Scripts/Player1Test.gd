@@ -15,6 +15,7 @@ func _ready():
 	if self.is_in_group("yellow"):
 		color = "yellow"
 		$MeshHolders/Green.queue_free()
+		$MeshHolders/Yellow_guy/
 
 	if self.is_in_group("green"):
 		color = "green"
